@@ -1,0 +1,33 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.6.1": {
+      "AspNet.Core.Web.Domains/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "compile": {
+          "net461/AspNet.Core.Web.Domains.dll": {}
+        },
+        "runtime": {
+          "net461/AspNet.Core.Web.Domains.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AspNet.Core.Web.Domains/1.0.0": {
+      "type": "project",
+      "path": "../../Domains/AspNet.Core.Web.Domains/project.json",
+      "msbuildProject": "../../Domains/AspNet.Core.Web.Domains/AspNet.Core.Web.Domains.xproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "AspNet.Core.Web.Domains >= 1.0.0-*"
+    ],
+    ".NETFramework,Version=v4.6.1": []
+  },
+  "tools": {},
+  "projectFileToolGroups": {}
+}
