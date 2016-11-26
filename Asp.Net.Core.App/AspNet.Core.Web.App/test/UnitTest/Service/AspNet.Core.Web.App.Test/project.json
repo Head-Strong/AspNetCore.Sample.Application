@@ -1,0 +1,21 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "frameworks": {
+    "net461": {}
+  },
+
+  "buildOptions": {   
+  },
+
+  "dependencies": {
+    "AspNet.Core.TestData": "1.0.0-*",
+    "AspNet.Core.Web.App": "1.0.0-*",
+    "dotnet-test-mstest": "1.1.2-preview",
+    "FluentAssertions": "4.17.0",
+    "Moq": "4.5.28",
+    "MSTest.TestFramework": "1.0.7-preview"
+  },
+
+  "testRunner": "mstest"
+}
