@@ -19,7 +19,7 @@ namespace AspNet.Core.Web.App.Test.Controllers
         public void Setup()
         {
             _customerServiceMock = new Mock<ICustomerService>();
-            _customerController = new CustomerController(_customerServiceMock.Object);                        
+            _customerController = new CustomerController(_customerServiceMock.Object, null);
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace AspNet.Core.Web.App.Test.Controllers
         {
             _customerServiceMock.Setup(x => x.GetCustomers()).Returns(new List<Customer>());
 
-            var  actualResult = _customerController.Get();
+            var actualResult = _customerController.Get();
 
             actualResult.Should().NotBeNull();
             _customerServiceMock.Verify(x => x.GetCustomers());
@@ -53,9 +53,9 @@ namespace AspNet.Core.Web.App.Test.Controllers
 
             var actualResult = _customerController.Post(customer);
 
-            actualResult.Should().NotBeNull();            
-            _customerServiceMock.Verify(x=>x.SaveCustomer(customer));
-        }    
+            actualResult.Should().NotBeNull();
+            _customerServiceMock.Verify(x => x.SaveCustomer(customer));
+        }
 
         [TestMethod]
         public void Save_Customers_Async()

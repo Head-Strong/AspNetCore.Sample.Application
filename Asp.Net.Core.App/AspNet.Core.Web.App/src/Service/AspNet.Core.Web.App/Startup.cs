@@ -1,9 +1,16 @@
-﻿using AspNet.Core.Web.App.InitialSetup;
+﻿using System.Collections.ObjectModel;
+using System.Data;
+using AspNet.Core.Web.App.InitialSetup;
+using EntityFramework.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
 
 namespace AspNet.Core.Web.App
 {
@@ -51,18 +58,35 @@ namespace AspNet.Core.Web.App
                     builder.AllowAnyMethod();
                 });
             });
-            
+
             services.ConfigureDependencies();
 
             services.ConfigureSwagger();
+
+            var connection = @"Server=(localdb)\ProjectsV13;Database=TestDatabase;Trusted_Connection=True;";
+
+            services
+                .AddDbContext<TestDatabaseContext>(options => options.UseSqlServer(connection));
+
+
+            //Log.Logger = new LoggerConfiguration()
+            //    .MinimumLevel.Information()
+            //    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+            //    .MinimumLevel.Override("System", LogEventLevel.Error)
+            //    .WriteTo.MSSqlServer(Configuration["Serilog:ConnectionString"],
+            //        Configuration["Serilog:TableName"], LogEventLevel.Information, columnOptions: columnOptions)
+            //    .CreateLogger();
+
+            services.ConfigureSeriLog(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         ///
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
+            loggerFactory.AddSerilog();
 
             app.UseCors("AllowAllOrigins");
 

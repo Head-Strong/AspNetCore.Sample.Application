@@ -37,3 +37,10 @@
 /Asp.Net.Core.App/AspNet.Core.Web.App/src/Domains/AspNet.Core.Web.Domains/project.lock.json
 /Asp.Net.Core.App/AspNet.Core.Web.App/src/BusinessLayer/AspNet.Core.Web.App.Bl.Implementation/project.lock.json
 /Asp.Net.Core.App/AspNet.Core.Web.App/src/BusinessLayer/AspNet.Core.Web.App.Bl.Interface/project.lock.json
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/RepositoryLayer/EntityFramework.Core/bin/Debug/net461
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/RepositoryLayer/EntityFramework.Core/obj/Debug/net461
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/RepositoryLayer/Orm.Service.Interface/obj/Debug/net461
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/Domains/AspNet.Core.Web.Domains/bin
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/RepositoryLayer/AspNet.Core.Web.App.Repo.Implementation/bin/Debug/net461
+/Asp.Net.Core.App/AspNet.Core.Web.App/src/Service/AspNet.Core.Web.App/bin
+/Asp.Net.Core.App/AspNet.Core.Web.App/test/UnitTest/BusinessLayer/AspNet.Core.Web.App.Bl.Implementation.UnitTest/bin

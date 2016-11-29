@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "frameworks": {
     "net461": {
@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "AspNet.Core.Web.App.Repo.Interface": "1.0.0-*",
-    "AspNet.Core.Web.Domains": "1.0.0-*"
+    "AspNet.Core.Web.Domains": "1.0.0-*",
+    "EntityFramework.Core": "1.0.0-*",
+    "AutoMapper": "3.2.1"
   }
 }

@@ -3,7 +3,9 @@ using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.App.Repo.Implementation;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
+using EntityFramework.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Orm.Service.Interface;
 
 namespace AspNet.Core.Web.App.InitialSetup
 {
@@ -21,6 +23,7 @@ namespace AspNet.Core.Web.App.InitialSetup
             services.AddScoped<IRepository<Customer>, CustomerRepository>();
             services.AddScoped<IRepository<Address>, AddressRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IOrmservice, TestDatabaseContext>();
         }
     }
 }

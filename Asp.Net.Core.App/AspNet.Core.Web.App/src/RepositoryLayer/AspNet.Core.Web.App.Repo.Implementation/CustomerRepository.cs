@@ -1,24 +1,55 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AspNet.Core.Web.App.Repo.Implementation.Mapper;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
+using EntityFramework.Core;
+using Orm.Service.Interface;
 
 namespace AspNet.Core.Web.App.Repo.Implementation
 {
     public class CustomerRepository : IRepository<Customer>
     {
-        public CustomerRepository()
+        private readonly TestDatabaseContext _testDatabaseContext;
+
+        public CustomerRepository(IOrmservice ormservice)
         {
+            _testDatabaseContext = (ormservice as TestDatabaseContext);
         }
 
         public Customer Save(Customer entity)
         {
-            throw new System.NotImplementedException();
+            var customerDb = CustomerMapper.Map(entity);
+
+            _testDatabaseContext.Customer.Add(customerDb);
+
+            _testDatabaseContext.SaveChanges();
+
+            entity = CustomerMapper.Map(customerDb);
+
+            return entity;
         }
 
         public IEnumerable<Customer> GetEntities()
         {
-            throw new System.NotImplementedException();
+            var customersDb = _testDatabaseContext.Customer;
+
+            var customers = new List<Customer>();
+
+            foreach (var customer in customersDb)
+            {
+                var mappedCustomer = CustomerMapper.Map(customer);
+
+                foreach (var address in customer.Address)
+                {
+                    var mappedAddress = AddressMapper.Map(address);
+                    mappedCustomer.Addresses.Add(mappedAddress);
+                }
+
+                customers.Add(mappedCustomer);
+            }
+
+            return customers;
         }
 
         public Task<IEnumerable<Customer>> GetEntitiesAsync()

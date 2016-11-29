@@ -7,6 +7,11 @@ namespace AspNet.Core.Web.App.Repo.Implementation
 {
     public class AddressRepository : IRepository<Address>
     {
+        public AddressRepository()
+        {
+            
+        }
+
         public Address Save(Address entity)
         {
             throw new System.NotImplementedException();
