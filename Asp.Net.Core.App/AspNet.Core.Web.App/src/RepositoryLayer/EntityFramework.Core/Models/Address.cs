@@ -1,16 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace EntityFramework.Core.Models
 {
     [Table("Address")]
+    [ComplexType]
     public partial class Address
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         [Column("AddressId")]
-        public int AddressId { get; set; }
+        public int Id { get; set; }
 
         [Column("CustomerId")]
         public int CustomerId { get; set; }

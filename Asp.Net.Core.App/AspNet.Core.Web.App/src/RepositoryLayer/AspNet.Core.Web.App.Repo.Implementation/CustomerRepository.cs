@@ -4,6 +4,7 @@ using AspNet.Core.Web.App.Repo.Implementation.Mapper;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
 using EntityFramework.Core;
+using Microsoft.EntityFrameworkCore;
 using Orm.Service.Interface;
 
 namespace AspNet.Core.Web.App.Repo.Implementation
@@ -32,13 +33,15 @@ namespace AspNet.Core.Web.App.Repo.Implementation
 
         public IEnumerable<Customer> GetEntities()
         {
-            var customersDb = _testDatabaseContext.Customer;
+            var customersDb = _testDatabaseContext.Customer.Include("Address");
 
             var customers = new List<Customer>();
 
             foreach (var customer in customersDb)
             {
                 var mappedCustomer = CustomerMapper.Map(customer);
+
+                mappedCustomer.Addresses = new List<Address>();
 
                 foreach (var address in customer.Address)
                 {

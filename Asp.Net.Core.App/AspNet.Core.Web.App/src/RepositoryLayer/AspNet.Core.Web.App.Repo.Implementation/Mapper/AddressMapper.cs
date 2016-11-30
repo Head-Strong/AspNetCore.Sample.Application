@@ -1,4 +1,6 @@
-﻿using AspNet.Core.Web.Domains;
+﻿using System;
+using AspNet.Core.Web.Domains;
+using Customer = EntityFramework.Core.Models.Customer;
 
 namespace AspNet.Core.Web.App.Repo.Implementation.Mapper
 {
@@ -8,7 +10,7 @@ namespace AspNet.Core.Web.App.Repo.Implementation.Mapper
         {
             var domainAddress = new Address
             {
-                AddressId = address.AddressId,
+                Id = address.Id,
                 CustomerId = address.CustomerId,
                 Pin = address.Pin
             };
@@ -20,9 +22,22 @@ namespace AspNet.Core.Web.App.Repo.Implementation.Mapper
         {
             var entityAddress = new EntityFramework.Core.Models.Address
             {
-                AddressId = address.AddressId,
+                Id = address.Id,
                 CustomerId = address.CustomerId,
                 Pin = address.Pin
+            };
+
+            return entityAddress;
+        }
+
+        public static EntityFramework.Core.Models.Address Map(Address address, Customer customer)
+        {
+            var entityAddress = new EntityFramework.Core.Models.Address
+            {
+                Id = address.Id,
+                CustomerId = address.Id,
+                Pin = address.Pin,
+                Customer = customer
             };
 
             return entityAddress;

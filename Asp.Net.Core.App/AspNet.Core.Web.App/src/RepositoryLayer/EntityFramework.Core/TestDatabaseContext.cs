@@ -6,17 +6,9 @@ namespace EntityFramework.Core
 {
     public partial class TestDatabaseContext : DbContext, IOrmservice
     {
-        public TestDatabaseContext(DbContextOptions options) : base(options)
+        public TestDatabaseContext(DbContextOptions<TestDatabaseContext> options) : base(options)
         {
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-
-        //    //modelBuilder.Entity<Customer>()
-        //    //    .HasMany(x => x.Address);
-        //}
 
         public virtual DbSet<Customer> Customer { get; set; }
 

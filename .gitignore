@@ -44,3 +44,5 @@
 /Asp.Net.Core.App/AspNet.Core.Web.App/src/RepositoryLayer/AspNet.Core.Web.App.Repo.Implementation/bin/Debug/net461
 /Asp.Net.Core.App/AspNet.Core.Web.App/src/Service/AspNet.Core.Web.App/bin
 /Asp.Net.Core.App/AspNet.Core.Web.App/test/UnitTest/BusinessLayer/AspNet.Core.Web.App.Bl.Implementation.UnitTest/bin
+/Asp.Net.Core.App/AspNet.Core.Web.App/test/IntegrationTest/AspNet.Core.Web.App.IntegrationTest/bin/Debug/net461/win7-x64
+/Asp.Net.Core.App/AspNet.Core.Web.App/test/IntegrationTest/AspNet.Core.Web.App.IntegrationTest/obj/Debug/net461

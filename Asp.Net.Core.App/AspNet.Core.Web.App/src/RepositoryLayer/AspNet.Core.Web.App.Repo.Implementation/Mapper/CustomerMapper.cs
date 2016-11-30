@@ -35,11 +35,14 @@ namespace AspNet.Core.Web.App.Repo.Implementation.Mapper
                 LastName = customer.LastName               
             };
 
-            foreach (var address in customer.Addresses)
+            if (customer.Addresses != null)
             {
-                var entityAddress = AddressMapper.Map(address);
+                foreach (var address in customer.Addresses)
+                {
+                    var entityAddress = AddressMapper.Map(address, entityCustomer);
 
-                entityCustomer.Address.Add(entityAddress);
+                    entityCustomer.Address.Add(entityAddress);
+                }
             }
 
             return entityCustomer;

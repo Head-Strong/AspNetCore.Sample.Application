@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.Domains;
-using EntityFramework.Core;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Serilog.Enrichers;
 
 namespace AspNet.Core.Web.App.Controllers
 {

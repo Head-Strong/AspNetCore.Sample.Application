@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Data;
-using AspNet.Core.Web.App.InitialSetup;
+﻿using AspNet.Core.Web.App.InitialSetup;
 using EntityFramework.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.MSSqlServer;
 
 namespace AspNet.Core.Web.App
 {
@@ -22,7 +18,17 @@ namespace AspNet.Core.Web.App
         /// <summary>
         /// 
         /// </summary>
+        public enum AppMode
+        {
+            Integration,
+            Normal
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="env"></param>
+        /// <param name="appMode"></param>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -67,15 +73,6 @@ namespace AspNet.Core.Web.App
 
             services
                 .AddDbContext<TestDatabaseContext>(options => options.UseSqlServer(connection));
-
-
-            //Log.Logger = new LoggerConfiguration()
-            //    .MinimumLevel.Information()
-            //    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            //    .MinimumLevel.Override("System", LogEventLevel.Error)
-            //    .WriteTo.MSSqlServer(Configuration["Serilog:ConnectionString"],
-            //        Configuration["Serilog:TableName"], LogEventLevel.Information, columnOptions: columnOptions)
-            //    .CreateLogger();
 
             services.ConfigureSeriLog(Configuration);
         }

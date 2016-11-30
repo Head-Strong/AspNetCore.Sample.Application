@@ -8,12 +8,10 @@ namespace EntityFramework.Core.Models
     {
         public Customer()
         {
-            Address = new HashSet<Address>();
+            Address = new List<Address>();
         }
-        
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
+
+        [Column("Id"), Key]
         public int Id { get; set; }
 
         [Column("Name")]
@@ -22,7 +20,6 @@ namespace EntityFramework.Core.Models
         [Column("LastName")]
         public string LastName { get; set; }
 
-        //[Column("Address")]
         public virtual ICollection<Address> Address { get; set; }
     }
 }
