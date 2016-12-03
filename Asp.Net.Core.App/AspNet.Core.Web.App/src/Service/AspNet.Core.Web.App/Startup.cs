@@ -1,7 +1,10 @@
-﻿using AspNet.Core.Web.App.InitialSetup;
+﻿using System.Threading.Tasks;
+using AspNet.Core.Web.App.InitialSetup;
+using AspNet.Core.Web.App.Middleware;
 using EntityFramework.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,17 +21,7 @@ namespace AspNet.Core.Web.App
         /// <summary>
         /// 
         /// </summary>
-        public enum AppMode
-        {
-            Integration,
-            Normal
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="env"></param>
-        /// <param name="appMode"></param>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -55,6 +48,8 @@ namespace AspNet.Core.Web.App
             // Add framework services.
             services.AddMvc();
 
+            services.AddMemoryCache();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins", builder =>
@@ -75,6 +70,8 @@ namespace AspNet.Core.Web.App
                 .AddDbContext<TestDatabaseContext>(options => options.UseSqlServer(connection));
 
             services.ConfigureSeriLog(Configuration);
+
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,14 +80,37 @@ namespace AspNet.Core.Web.App
         {
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
-            loggerFactory.AddSerilog();
 
-            app.UseCors("AllowAllOrigins");
+            app.UseExceptionHandler(configure: CustomHandler);
+
+            app.UseStaticFiles();
 
             app.UseSwagger();
             app.UseSwaggerUi();
 
-            app.UseMvc();
+            loggerFactory.AddSerilog();
+
+            app.UseCors("AllowAllOrigins");
+
+            app.UseMiddleware<AuthenticateHandler>();
+
+            //app.UseMiddleware<TestMiddleware>();
+
+            app.UseMvc();            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        private static void CustomHandler(IApplicationBuilder app)
+        {
+            // app.Run(handler: CustomHandler);
+
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("Map Test Successful");
+            });
         }
     }
 }

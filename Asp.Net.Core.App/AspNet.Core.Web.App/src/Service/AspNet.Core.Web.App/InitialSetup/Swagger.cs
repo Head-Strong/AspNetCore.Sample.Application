@@ -27,6 +27,7 @@ namespace AspNet.Core.Web.App.InitialSetup
                 });
 
                 options.IncludeXmlComments(GetXmlCommentsPath());
+                options.DescribeAllEnumsAsStrings();             
             });
         }
 

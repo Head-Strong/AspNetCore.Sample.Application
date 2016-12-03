@@ -48,9 +48,9 @@ namespace AspNet.Core.Web.App.Controllers
             object one = 123;
             object two = 123;
 
-            _logger.ForContext("User","Aditya").Information("Data Added Successfully", new {one, two});
-            _logger.Error("Data Critical Added Successfully");
-            _logger.Fatal("Data Error Added Successfully");
+            //_logger.ForContext("User","Aditya").Information("Data Added Successfully", new {one, two});
+            //_logger.Error("Data Critical Added Successfully");
+            //_logger.Fatal("Data Error Added Successfully");
 
             var result = _customerService.GetCustomers();
             return Ok(result);

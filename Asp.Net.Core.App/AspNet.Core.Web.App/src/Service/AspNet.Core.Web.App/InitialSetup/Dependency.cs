@@ -1,5 +1,6 @@
 ﻿using AspNet.Core.Web.App.Bl.Implementation;
 using AspNet.Core.Web.App.Bl.Interface;
+using AspNet.Core.Web.App.Client;
 using AspNet.Core.Web.App.Repo.Implementation;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
@@ -24,6 +25,8 @@ namespace AspNet.Core.Web.App.InitialSetup
             services.AddScoped<IRepository<Address>, AddressRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IOrmservice, TestDatabaseContext>();
+            services.AddScoped<IOauthClient, OauthClient>();
+            services.AddScoped<IOauthCache, OAuthCache>();
         }
     }
 }
