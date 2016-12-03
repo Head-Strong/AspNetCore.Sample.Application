@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace AspNet.Core.Web.Domains
 {
@@ -8,8 +9,23 @@ namespace AspNet.Core.Web.Domains
 
         public string Name { get; set; }
 
-        public string LastName { get; set; }    
+        public string LastName { get; set; }
 
-        public List<Address> Addresses { get; set; } 
+        public List<Address> Addresses { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CustomErrorDto
+    {
+        public string ErrorMessage { get; set; }    
+
+        public int ErrorType { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

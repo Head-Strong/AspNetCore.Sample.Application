@@ -2400,6 +2400,9 @@
       "AspNet.Core.Web.Domains/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
         "compile": {
           "net461/AspNet.Core.Web.Domains.dll": {}
         },

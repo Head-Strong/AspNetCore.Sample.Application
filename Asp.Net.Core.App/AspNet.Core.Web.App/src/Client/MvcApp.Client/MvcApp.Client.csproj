@@ -94,8 +94,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTokenCaching\IOauthCache.cs" />
+    <Compile Include="AccessTokenCaching\OAuthCache.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\CustomAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -115,6 +118,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\models\models.csproj">
+      <Project>{44014745-a809-4304-b373-e5261acd6bdf}</Project>
+      <Name>models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OAuth.Client\OAuth.Client.csproj">
+      <Project>{79cbfd45-eda8-4a3b-8f4d-e51517a370fa}</Project>
+      <Name>OAuth.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

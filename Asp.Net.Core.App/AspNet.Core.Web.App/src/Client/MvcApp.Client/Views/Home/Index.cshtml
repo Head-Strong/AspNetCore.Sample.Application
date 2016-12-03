@@ -1,66 +1,83 @@
-﻿<!DOCTYPE html>
+﻿@model List<models.Customer>
+<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Customer Data</title>
     <meta charset="utf-8" />
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-    <input type="button" value="Save" onclick="SaveData();" />
-    <br /><br />
-    <input type="button" value="Get" onclick="GetData();" />
+    @*<input type="button" value="Save" onclick="SaveData();" />
+        <br /><br />
+        <input type="button" value="Get" onclick="GetData();" />*@
+
+    @foreach (var customer in Model)
+    {
+        <ul>
+            @customer.Name + " " + @customer.LastName
+
+            @foreach (var address in customer.Addresses)
+            {
+                @Html.Raw("<li>")
+                @address.Pin
+                @Html.Raw("</li>")
+            }
+        </ul>
+    }
+
+
 </body>
 </html>
-<script type="text/javascript">
-    var url = "http://localhost:61684/api/values";
+@*<script type="text/javascript">
+        var url = "http://localhost:61684/api/values";
 
-    function SaveData() {
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            dataType: "json",
-            url: url,
-            data: customer,
-            success: function (data) {
-                alert(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
+        function SaveData() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                url: url,
+                data: customer,
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function GetData() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                url: url,
+                data: {},
+                success: function (data) {
+                    alert(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        var customer = JSON.stringify({
+            "Id": -1,
+            "Name": "Test3",
+            "LastName": "Test4",
+            "Addresses": [
+                {
+                    "Id": -1,
+                    "Pin": "100000",
+                    "CustomerId": -1
+                },
+                {
+                    "Id": -1,
+                    "Pin": "200000",
+                    "CustomerId": -1
+                }
+            ]
         });
-    }
-
-    function GetData() {
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            url: url,
-            data: {},
-            success: function (data) {
-                alert(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    }
-
-    var customer = JSON.stringify({
-        "Id": -1,
-        "Name": "Test3",
-        "LastName": "Test4",
-        "Addresses": [
-            {
-                "Id": -1,
-                "Pin": "100000",
-                "CustomerId": -1
-            },
-            {
-                "Id": -1,
-                "Pin": "200000",
-                "CustomerId": -1
-            }
-        ]
-    });
-</script>
+    </script>*@

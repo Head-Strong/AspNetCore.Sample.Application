@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AspNet.Core.Web.App.Client;
 using Microsoft.AspNetCore.Http;
@@ -45,42 +45,67 @@ namespace AspNet.Core.Web.App.Middleware
 
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
-                var cachedToken = _oauthCache.GetAccessToken();
-
-                if (!cachedToken.Equals(accessToken))
-                {
-                    _logger.ForContext("Other", "Cached Token Value is :" + cachedToken + " ~ Tomcat Token :" + accessToken)
-                        .Information("Mismatch in Authorization Header");
-
-                    _oauthCache.ResetCache();
-
-                    var response = _oauthClient.GetUserInfo(accessToken);
-
-                    // Invalid Request
-                    if (response == null)
-                    {
-                        _logger.Information("Invalid AccessToken provided by user :" + accessToken);
-                        await context.Response.WriteAsync("Invalid Access Token Guys");
-                    }
-                    else
-                    {
-                        _oauthCache.SetAccessToken(accessToken,50);
-                        _logger.Information("Handling Authentication Handler Finished.");
-                        await _next.Invoke(context);
-                        
-                    }
-                }
-                else
-                {
-                    _logger.Information("user logged successfully");
-                    await _next.Invoke(context);
-                }
+                await AccessTokenProvidedByClientApplication(context, accessToken);
             }
             else
             {
-                _logger.Information("Authorization Header is missing");
-                await context.Response.WriteAsync("Invalid header");
+                await UnAuthorizedResponseToClient(context, ErrorMessages.ErrorMessageKey.HeaderMissing, 500);
             }
         }
+
+        
+        private async Task AccessTokenProvidedByClientApplication(HttpContext context, string accessToken)
+        {
+            var cachedToken = _oauthCache.GetAccessToken();
+
+            if (cachedToken.Equals(accessToken))
+            {
+                _logger.Information("user logged successfully");
+
+                await _next.Invoke(context);
+            }
+            else
+            {
+                await AccessTokenAndCachedTokenMisMatch(context, cachedToken, accessToken);                
+            }
+        }
+
+        private async Task AccessTokenAndCachedTokenMisMatch(HttpContext context, string cachedToken, string accessToken)
+        {
+            _logger.ForContext("Other", "Cached Token Value is :" + cachedToken + " ~ Access Token :" + accessToken)
+                .Information("Mismatch in Access Token And Cached Token");
+
+            _oauthCache.ResetCache();
+
+            var response = _oauthClient.GetUserInfo(accessToken);
+
+            // Invalid Request
+            if (response != null)
+            {
+                _oauthCache.SetAccessToken(accessToken, 50);
+                _logger.Information("Handling Authentication Handler Finished.");
+                await _next.Invoke(context);
+            }
+            else
+            {
+                await UnAuthorizedResponseToClient(context, ErrorMessages.ErrorMessageKey.InvalidAccessToken, 500);                
+            }
+        }
+
+        private async Task UnAuthorizedResponseToClient(HttpContext context, ErrorMessages.ErrorMessageKey errorMessageKey, int statusCode)
+        {
+            var errorMessage = ErrorMessages.SgConnectValidationErrorList[errorMessageKey];
+
+            _logger.Information(errorMessage);
+
+            context.Response.StatusCode = statusCode;
+            //context.Response.ContentType = "application/json";
+
+            await context.Response.WriteAsync(new Domains.CustomErrorDto()
+            {
+                ErrorType = (int) errorMessageKey,
+                ErrorMessage = errorMessage
+            }.ToString());
+        }        
     }
 }
