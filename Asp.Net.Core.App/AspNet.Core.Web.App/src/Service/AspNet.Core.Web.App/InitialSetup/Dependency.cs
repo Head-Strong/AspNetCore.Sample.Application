@@ -4,6 +4,7 @@ using AspNet.Core.Web.App.Client;
 using AspNet.Core.Web.App.Repo.Implementation;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
+using CustomCacheProvider;
 using EntityFramework.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Orm.Service.Interface;
@@ -27,6 +28,7 @@ namespace AspNet.Core.Web.App.InitialSetup
             services.AddScoped<IOrmservice, TestDatabaseContext>();
             services.AddScoped<IOauthClient, OauthClient>();
             services.AddScoped<IOauthCache, OAuthCache>();
+            services.AddScoped<ICustomCacheManager, CustomCacheManager>();
         }
     }
 }

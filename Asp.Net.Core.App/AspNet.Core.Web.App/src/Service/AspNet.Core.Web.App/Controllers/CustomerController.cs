@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.Domains;
+using CustomLogger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNet.Core.Web.App.Controllers
@@ -45,12 +47,9 @@ namespace AspNet.Core.Web.App.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            object one = 123;
-            object two = 123;
-
-            //_logger.ForContext("User","Aditya").Information("Data Added Successfully", new {one, two});
-            //_logger.Error("Data Critical Added Successfully");
-            //_logger.Fatal("Data Error Added Successfully");
+            _logger.CustomInformation(user: "Aditya", enviornment: "Dev", informationMessage: "Data Added Successfully");
+            _logger.CustomError(errorMessage: "Data Critical Added Successfully");
+            _logger.CustomFatal(fatalMessage: "Data Error Added Successfully");
 
             var result = _customerService.GetCustomers();
             return Ok(result);
@@ -75,6 +74,7 @@ namespace AspNet.Core.Web.App.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/[controller]/getasync")]
+        [Produces("application/json", Type = typeof(List<Customer>))]
         public async Task<IActionResult> GetAsync()
         {
             var result = await _customerService.GetCustomersAsync();

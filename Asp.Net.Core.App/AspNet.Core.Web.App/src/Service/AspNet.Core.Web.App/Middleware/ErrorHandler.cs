@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Serilog;
+using CustomLogger;
 
 namespace AspNet.Core.Web.App.Middleware
 {
@@ -17,7 +18,7 @@ namespace AspNet.Core.Web.App.Middleware
         /// </summary>
         /// <param name="next"></param>
         /// <param name="logger"></param>
-        public ErrorHandler(RequestDelegate next, Serilog.ILogger logger)
+        public ErrorHandler(RequestDelegate next, ILogger logger)
         {
             _next = next;
             _logger = logger;
@@ -30,8 +31,8 @@ namespace AspNet.Core.Web.App.Middleware
         /// <returns></returns>
         public void Invoke(HttpContext context)
         {
-            _logger.Information("Handling ErrorHandlerMiddleware : " + context.Request.Path);
-            _logger.Information("Handling TestMiddleware Finished.");
+            _logger.CustomInformation(informationMessage:"Handling ErrorHandlerMiddleware : " + context.Request.Path);
+            _logger.CustomInformation(informationMessage:"Handling TestMiddleware Finished.");
         }
     }
 }

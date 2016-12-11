@@ -3,20 +3,26 @@ using System.Threading.Tasks;
 using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.App.Repo.Interface;
 using AspNet.Core.Web.Domains;
+using CustomLogger;
+using Serilog;
 
 namespace AspNet.Core.Web.App.Bl.Implementation
 {
     public class CustomerService : ICustomerService
     {
         private readonly IRepository<Customer> _repository;
+        private readonly ILogger _logger;
 
-        public CustomerService(IRepository<Customer> repository)
+        public CustomerService(IRepository<Customer> repository, ILogger logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
+            _logger.CustomInformation(user: "Aditya", other: "CustomerService", enviornment: "Dev", host: "localhost", informationMessage: "Inside Get Customer Service");
+
             return _repository.GetEntities();
         }
 

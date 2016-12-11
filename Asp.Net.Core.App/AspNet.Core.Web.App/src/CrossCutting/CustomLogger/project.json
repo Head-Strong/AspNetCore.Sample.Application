@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+    "Serilog": "2.4.0-dev-00766",
+    "Serilog.Extensions.Logging": "1.4.0-dev-10136",
+    "Serilog.Sinks.Email": "2.1.0",
+    "Serilog.Sinks.MSSqlServer": "4.2.0"
+  },
+
+  "frameworks": {
+    "net461": {
+    }
+  }
+}

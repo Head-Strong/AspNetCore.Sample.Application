@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.Swagger.Model;
+using Swashbuckle.SwaggerGen.Application;
 
 namespace AspNet.Core.Web.App.InitialSetup
 {
@@ -27,7 +29,7 @@ namespace AspNet.Core.Web.App.InitialSetup
                 });
 
                 options.IncludeXmlComments(GetXmlCommentsPath());
-                options.DescribeAllEnumsAsStrings();             
+                options.DescribeAllEnumsAsStrings();
             });
         }
 

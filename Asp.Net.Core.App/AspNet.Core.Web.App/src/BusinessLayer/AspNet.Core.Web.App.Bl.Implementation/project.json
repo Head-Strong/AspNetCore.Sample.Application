@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "frameworks": {
     "net461": {
@@ -7,6 +7,7 @@
   "dependencies": {
     "AspNet.Core.Web.App.Bl.Interface": "1.0.0-*",
     "AspNet.Core.Web.App.Repo.Interface": "1.0.0-*",
-    "AspNet.Core.Web.Domains": "1.0.0-*"
+    "AspNet.Core.Web.Domains": "1.0.0-*",
+    "CustomLogger": "1.0.0-*"
   }
 }

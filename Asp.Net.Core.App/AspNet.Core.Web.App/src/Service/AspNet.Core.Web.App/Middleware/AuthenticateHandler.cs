@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using AspNet.Core.Web.App.Client;
+using CustomLogger;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
@@ -39,7 +40,7 @@ namespace AspNet.Core.Web.App.Middleware
         /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
-            _logger.Information("Handling Authentication Handler : " + context.Request.Path);
+            _logger.CustomInformation(informationMessage:"Handling Authentication Handler : " + context.Request.Path);
 
             var accessToken = context.Request.Headers["Authorization"].FirstOrDefault();
 
@@ -60,7 +61,7 @@ namespace AspNet.Core.Web.App.Middleware
 
             if (cachedToken.Equals(accessToken))
             {
-                _logger.Information("user logged successfully");
+                _logger.CustomInformation(informationMessage:"user logged successfully");
 
                 await _next.Invoke(context);
             }
@@ -72,8 +73,9 @@ namespace AspNet.Core.Web.App.Middleware
 
         private async Task AccessTokenAndCachedTokenMisMatch(HttpContext context, string cachedToken, string accessToken)
         {
-            _logger.ForContext("Other", "Cached Token Value is :" + cachedToken + " ~ Access Token :" + accessToken)
-                .Information("Mismatch in Access Token And Cached Token");
+            var otherInfo = "Cached Token :" + cachedToken + "~ Access Token :" + accessToken;
+
+            _logger.CustomInformation(user:"Aditya",other:otherInfo,informationMessage: "Mismatch in Access Token And Cached Token");
 
             _oauthCache.ResetCache();
 
@@ -83,7 +85,7 @@ namespace AspNet.Core.Web.App.Middleware
             if (response != null)
             {
                 _oauthCache.SetAccessToken(accessToken, 50);
-                _logger.Information("Handling Authentication Handler Finished.");
+                _logger.CustomInformation(informationMessage:"Handling Authentication Handler Finished.");
                 await _next.Invoke(context);
             }
             else
@@ -96,7 +98,7 @@ namespace AspNet.Core.Web.App.Middleware
         {
             var errorMessage = ErrorMessages.SgConnectValidationErrorList[errorMessageKey];
 
-            _logger.Information(errorMessage);
+            _logger.CustomInformation(informationMessage:errorMessage);
 
             context.Response.StatusCode = statusCode;
             //context.Response.ContentType = "application/json";

@@ -14,12 +14,15 @@ namespace AspNet.Core.Web.App.Test.Controllers
     {
         private Mock<ICustomerService> _customerServiceMock;
         private CustomerController _customerController;
+        private Serilog.ILogger _logger;
 
         [TestInitialize]
         public void Setup()
         {
             _customerServiceMock = new Mock<ICustomerService>();
-            _customerController = new CustomerController(_customerServiceMock.Object, null);
+            _logger = new Serilog.LoggerConfiguration().CreateLogger();
+            
+            _customerController = new CustomerController(_customerServiceMock.Object, _logger);
         }
 
         [TestMethod]

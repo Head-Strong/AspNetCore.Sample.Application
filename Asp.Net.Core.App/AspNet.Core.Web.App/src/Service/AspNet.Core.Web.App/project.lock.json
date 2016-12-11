@@ -14,6 +14,45 @@
           "lib/net40/AutoMapper.dll": {}
         }
       },
+      "CommonServiceLocator/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/NET35/Microsoft.Practices.ServiceLocation.dll": {}
+        },
+        "runtime": {
+          "lib/NET35/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Caching/5.0.505": {
+        "type": "package",
+        "dependencies": {
+          "EnterpriseLibrary.Common": "5.0.0"
+        },
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Caching.dll": {}
+        },
+        "runtime": {
+          "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Caching.dll": {}
+        }
+      },
+      "EnterpriseLibrary.Common/5.0.505": {
+        "type": "package",
+        "dependencies": {
+          "Unity.Interception": "2.1.0"
+        },
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        },
+        "runtime": {
+          "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Common.dll": {}
+        }
+      },
       "Libuv/1.9.0": {
         "type": "package",
         "dependencies": {
@@ -1422,6 +1461,22 @@
           "lib/net46/Serilog.Extensions.Logging.dll": {}
         }
       },
+      "Serilog.Sinks.Email/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0",
+          "Serilog.Sinks.PeriodicBatching": "2.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Net"
+        ],
+        "compile": {
+          "lib/net45/Serilog.Sinks.Email.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Serilog.Sinks.Email.dll": {}
+        }
+      },
       "Serilog.Sinks.MSSqlServer/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -2343,13 +2398,48 @@
           "lib/net46/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Unity/2.1.505": {
+        "type": "package",
+        "dependencies": {
+          "CommonServiceLocator": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET35/Microsoft.Practices.Unity.Configuration.dll": {},
+          "lib/NET35/Microsoft.Practices.Unity.dll": {}
+        },
+        "runtime": {
+          "lib/NET35/Microsoft.Practices.Unity.Configuration.dll": {},
+          "lib/NET35/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Unity.Interception/2.1.505": {
+        "type": "package",
+        "dependencies": {
+          "Unity": "2.1.0"
+        },
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "lib/NET35/Microsoft.Practices.Unity.Interception.Configuration.dll": {},
+          "lib/NET35/Microsoft.Practices.Unity.Interception.dll": {}
+        },
+        "runtime": {
+          "lib/NET35/Microsoft.Practices.Unity.Interception.Configuration.dll": {},
+          "lib/NET35/Microsoft.Practices.Unity.Interception.dll": {}
+        }
+      },
       "AspNet.Core.Web.App.Bl.Implementation/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "AspNet.Core.Web.App.Bl.Interface": "1.0.0",
           "AspNet.Core.Web.App.Repo.Interface": "1.0.0",
-          "AspNet.Core.Web.Domains": "1.0.0"
+          "AspNet.Core.Web.Domains": "1.0.0",
+          "CustomLogger": "1.0.0"
         },
         "compile": {
           "net461/AspNet.Core.Web.App.Bl.Implementation.dll": {}
@@ -2410,6 +2500,38 @@
           "net461/AspNet.Core.Web.Domains.dll": {}
         }
       },
+      "CustomCacheProvider/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "EnterpriseLibrary.Caching": "5.0.505",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "net461/CustomCacheProvider.dll": {}
+        },
+        "runtime": {
+          "net461/CustomCacheProvider.dll": {}
+        }
+      },
+      "CustomLogger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+          "Serilog": "2.4.0-dev-00766",
+          "Serilog.Extensions.Logging": "1.4.0-dev-10136",
+          "Serilog.Sinks.Email": "2.1.0",
+          "Serilog.Sinks.MSSqlServer": "4.2.0"
+        },
+        "compile": {
+          "net461/CustomLogger.dll": {}
+        },
+        "runtime": {
+          "net461/CustomLogger.dll": {}
+        }
+      },
       "EntityFramework.Core/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -2436,23 +2558,6 @@
         },
         "runtime": {
           "net461/Orm.Service.Interface.dll": {}
-        }
-      },
-      "Serilog.Sinks.Email/2.1.1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Serilog": "2.0.0",
-          "Serilog.Sinks.PeriodicBatching": "2.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.Net"
-        ],
-        "compile": {
-          "net45/Serilog.Sinks.Email.dll": {}
-        },
-        "runtime": {
-          "net45/Serilog.Sinks.Email.dll": {}
         }
       }
     }
@@ -2505,6 +2610,50 @@
         "tools/wp8/uninstall.ps1",
         "tools/wpa81/Install.ps1",
         "tools/wpa81/uninstall.ps1"
+      ]
+    },
+    "CommonServiceLocator/1.0.0": {
+      "sha512": "RJjv0yxm+Fk/ak/CVMTGr0ng7g/nudkVYos4eQrIDpth3BdE1j7J2ddRm8FXtOoIZbgDqTU6hKq5zoackwL3HQ==",
+      "type": "package",
+      "path": "CommonServiceLocator/1.0.0",
+      "files": [
+        "CommonServiceLocator.1.0.0.nupkg.sha512",
+        "CommonServiceLocator.nuspec",
+        "lib/NET35/Microsoft.Practices.ServiceLocation.XML",
+        "lib/NET35/Microsoft.Practices.ServiceLocation.dll",
+        "lib/NET35/Microsoft.Practices.ServiceLocation.pdb",
+        "lib/SL30/Microsoft.Practices.ServiceLocation.XML",
+        "lib/SL30/Microsoft.Practices.ServiceLocation.dll"
+      ]
+    },
+    "EnterpriseLibrary.Caching/5.0.505": {
+      "sha512": "9aO3yZTTJCfnP9jBhiLt7xX+UCA9wGpw3Q4zpaLmkIoEn0k8XwU6pRP8FUT3USLGeMpUwJh4t6F8nyIojKchXA==",
+      "type": "package",
+      "path": "EnterpriseLibrary.Caching/5.0.505",
+      "files": [
+        "EnterpriseLibrary.Caching.5.0.505.nupkg.sha512",
+        "EnterpriseLibrary.Caching.nuspec",
+        "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Caching.dll",
+        "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Caching.xml",
+        "lib/SL40/Microsoft.Practices.EnterpriseLibrary.Caching.Silverlight.dll",
+        "lib/SL40/Microsoft.Practices.EnterpriseLibrary.Caching.Silverlight.xml",
+        "tools/Utils.psm1",
+        "tools/install.ps1"
+      ]
+    },
+    "EnterpriseLibrary.Common/5.0.505": {
+      "sha512": "56ohaIm5TXzb6oR6QkUI3VtzI2fFVdAfhQaAanTZ9j/RrTAL1JvvN1d4qmAPc3mb9e+6zJUp1F+n4yA3ILHhpw==",
+      "type": "package",
+      "path": "EnterpriseLibrary.Common/5.0.505",
+      "files": [
+        "EnterpriseLibrary.Common.5.0.505.nupkg.sha512",
+        "EnterpriseLibrary.Common.nuspec",
+        "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Common.dll",
+        "lib/NET35/Microsoft.Practices.EnterpriseLibrary.Common.xml",
+        "lib/SL40/Microsoft.Practices.EnterpriseLibrary.Common.Silverlight.dll",
+        "lib/SL40/Microsoft.Practices.EnterpriseLibrary.Common.Silverlight.xml",
+        "tools/Utils.psm1",
+        "tools/install.ps1"
       ]
     },
     "Libuv/1.9.0": {
@@ -3744,6 +3893,19 @@
         "lib/net46/Serilog.Extensions.Logging.xml",
         "lib/netstandard1.3/Serilog.Extensions.Logging.dll",
         "lib/netstandard1.3/Serilog.Extensions.Logging.xml"
+      ]
+    },
+    "Serilog.Sinks.Email/2.1.0": {
+      "sha512": "+AtwfjCblTiHVvBaEEPQCJ76sjStAex8wuDQzgq+hoCGXiKfqPaSL7R4X+hnmxQ0aZjPemlXQsJY5MKLogMAzw==",
+      "type": "package",
+      "path": "Serilog.Sinks.Email/2.1.0",
+      "files": [
+        "Serilog.Sinks.Email.2.1.0.nupkg.sha512",
+        "Serilog.Sinks.Email.nuspec",
+        "lib/net45/Serilog.Sinks.Email.dll",
+        "lib/net45/Serilog.Sinks.Email.xml",
+        "lib/netstandard1.3/Serilog.Sinks.Email.dll",
+        "lib/netstandard1.3/Serilog.Sinks.Email.xml"
       ]
     },
     "Serilog.Sinks.MSSqlServer/4.2.0": {
@@ -7141,6 +7303,40 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "Unity/2.1.505": {
+      "sha512": "nln8FUuLPocfHTGiXsCDSFCr/K5yCTIkrQdhWy9DPfGQea++hU5Ko84mpuTL6BzhT/SfIhhBrGMhlxzN59bY/A==",
+      "type": "package",
+      "path": "Unity/2.1.505",
+      "files": [
+        "Unity.2.1.505.nupkg.sha512",
+        "Unity.nuspec",
+        "lib/NET35/Microsoft.Practices.Unity.Configuration.dll",
+        "lib/NET35/Microsoft.Practices.Unity.Configuration.xml",
+        "lib/NET35/Microsoft.Practices.Unity.dll",
+        "lib/NET35/Microsoft.Practices.Unity.xml",
+        "lib/SL30/Microsoft.Practices.Unity.Silverlight.dll",
+        "lib/SL30/Microsoft.Practices.Unity.Silverlight.xml",
+        "tools/Utils.psm1",
+        "tools/install.ps1"
+      ]
+    },
+    "Unity.Interception/2.1.505": {
+      "sha512": "5Ri8/+kEr98AsRzQHSe3Zay4NyxsdsbW7qgWr+pCiVTC0kCaAe0oy2TyUdPIaCtVtV9Ruf89buduWw0PKRbLEA==",
+      "type": "package",
+      "path": "Unity.Interception/2.1.505",
+      "files": [
+        "Unity.Interception.2.1.505.nupkg.sha512",
+        "Unity.Interception.nuspec",
+        "lib/NET35/Microsoft.Practices.Unity.Interception.Configuration.dll",
+        "lib/NET35/Microsoft.Practices.Unity.Interception.Configuration.xml",
+        "lib/NET35/Microsoft.Practices.Unity.Interception.dll",
+        "lib/NET35/Microsoft.Practices.Unity.Interception.xml",
+        "lib/SL40/Microsoft.Practices.Unity.Interception.Silverlight.dll",
+        "lib/SL40/Microsoft.Practices.Unity.Interception.Silverlight.xml",
+        "tools/Utils.psm1",
+        "tools/install.ps1"
+      ]
+    },
     "AspNet.Core.Web.App.Bl.Implementation/1.0.0": {
       "type": "project",
       "path": "../../BusinessLayer/AspNet.Core.Web.App.Bl.Implementation/project.json",
@@ -7166,6 +7362,16 @@
       "path": "../../Domains/AspNet.Core.Web.Domains/project.json",
       "msbuildProject": "../../Domains/AspNet.Core.Web.Domains/AspNet.Core.Web.Domains.xproj"
     },
+    "CustomCacheProvider/1.0.0": {
+      "type": "project",
+      "path": "../../Caching/CustomCacheProvider/project.json",
+      "msbuildProject": "../../Caching/CustomCacheProvider/CustomCacheProvider.xproj"
+    },
+    "CustomLogger/1.0.0": {
+      "type": "project",
+      "path": "../../CrossCutting/CustomLogger/project.json",
+      "msbuildProject": "../../CrossCutting/CustomLogger/CustomLogger.xproj"
+    },
     "EntityFramework.Core/1.0.0": {
       "type": "project",
       "path": "../../RepositoryLayer/EntityFramework.Core/project.json",
@@ -7175,11 +7381,6 @@
       "type": "project",
       "path": "../../RepositoryLayer/Orm.Service.Interface/project.json",
       "msbuildProject": "../../RepositoryLayer/Orm.Service.Interface/Orm.Service.Interface.xproj"
-    },
-    "Serilog.Sinks.Email/2.1.1": {
-      "type": "project",
-      "path": "../../../../../../serilog-sinks-email/src/Serilog.Sinks.Email/project.json",
-      "msbuildProject": "../../../../../../serilog-sinks-email/src/Serilog.Sinks.Email/Serilog.Sinks.Email.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7189,6 +7390,8 @@
       "AspNet.Core.Web.App.Repo.Implementation >= 1.0.0-*",
       "AspNet.Core.Web.App.Repo.Interface >= 1.0.0-*",
       "AspNet.Core.Web.Domains >= 1.0.0-*",
+      "CustomCacheProvider >= 1.0.0-*",
+      "CustomLogger >= 1.0.0-*",
       "EntityFramework.Core >= 1.0.0-*",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.1.0",
@@ -7205,10 +7408,6 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Orm.Service.Interface >= 1.0.0-*",
-      "Serilog >= 2.4.0-dev-00766",
-      "Serilog.Extensions.Logging >= 1.4.0-dev-10136",
-      "Serilog.Sinks.Email >= 2.1.1-*",
-      "Serilog.Sinks.MSSqlServer >= 4.2.0",
       "Swashbuckle >= 6.0.0-beta901"
     ],
     ".NETFramework,Version=v4.6.1": []

@@ -1,5 +1,5 @@
 {
-  "projects": [ "src", "test", "src/Domains", "src/RepositoryLayer", "src/BusinessLayer", "test/TestData" ],
+  "projects": [ "src", "test", "src/Domains", "src/RepositoryLayer", "src/BusinessLayer", "test/TestData", "src/Caching", "src/Service", "src/CrossCutting" ],
   "sdk": {
     "version": "1.0.0-preview2-003121"
   }

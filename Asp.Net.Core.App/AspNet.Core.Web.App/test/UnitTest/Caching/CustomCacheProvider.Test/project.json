@@ -6,17 +6,13 @@
   },
 
   "buildOptions": {
-    "copyToOutput": {
-      "include": "appsettings.json"
-    }
+    "emitEntryPoint": true
   },
 
   "dependencies": {
-    "AspNet.Core.TestData": "1.0.0-*",
-    "AspNet.Core.Web.App": "1.0.0-*",
+    "CustomCacheProvider": "1.0.0-*",
     "dotnet-test-mstest": "1.1.2-preview",
     "FluentAssertions": "4.17.0",
-    "Microsoft.AspNetCore.TestHost": "1.0.0",
     "Moq": "4.5.28",
     "MSTest.TestFramework": "1.0.7-preview"
   },

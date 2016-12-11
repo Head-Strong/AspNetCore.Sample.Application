@@ -5,6 +5,8 @@
     "AspNet.Core.Web.App.Repo.Implementation": "1.0.0-*",
     "AspNet.Core.Web.App.Repo.Interface": "1.0.0-*",
     "AspNet.Core.Web.Domains": "1.0.0-*",
+    "CustomCacheProvider": "1.0.0-*",
+    "CustomLogger": "1.0.0-*",
     "EntityFramework.Core": "1.0.0-*",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -21,10 +23,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Orm.Service.Interface": "1.0.0-*",
-    "Serilog": "2.4.0-dev-00766",
-    "Serilog.Extensions.Logging": "1.4.0-dev-10136",
-    "Serilog.Sinks.Email": "2.1.1-*",
-    "Serilog.Sinks.MSSqlServer": "4.2.0",
+    //"Serilog": "2.4.0-dev-00766",
+    //"Serilog.Extensions.Logging": "1.4.0-dev-10136",
+    //"Serilog.Sinks.Email": "2.1.0",
+    //"Serilog.Sinks.MSSqlServer": "4.2.0",
     "Swashbuckle": "6.0.0-beta901"
   },
 
@@ -55,5 +57,6 @@
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  }
+  },
+  "userSecretsId": "aspnet-AspNet.Core.Web.App-20161204055728"
 }

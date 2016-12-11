@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Serilog;
+using CustomLogger;
 
 namespace AspNet.Core.Web.App.Middleware
 {
@@ -30,9 +31,9 @@ namespace AspNet.Core.Web.App.Middleware
         /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
-            _logger.Information("Handling TestMiddleware : " + context.Request.Path);
+            _logger.CustomInformation(informationMessage:"Handling TestMiddleware : " + context.Request.Path);
             await _next.Invoke(context);
-            _logger.Information("Handling TestMiddleware Finished.");
+            _logger.CustomInformation(informationMessage:"Handling TestMiddleware Finished.");
         }
     }
 }

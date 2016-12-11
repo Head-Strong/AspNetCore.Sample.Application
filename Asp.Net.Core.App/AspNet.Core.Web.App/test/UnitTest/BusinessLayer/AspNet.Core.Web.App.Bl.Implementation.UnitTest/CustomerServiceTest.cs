@@ -6,6 +6,8 @@ using AspNet.Core.Web.Domains;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using Moq;
+using Serilog;
+using Serilog.Core;
 
 namespace AspNet.Core.Web.App.Bl.Implementation.Test
 {
@@ -14,12 +16,14 @@ namespace AspNet.Core.Web.App.Bl.Implementation.Test
     {
         private Mock<IRepository<Customer>> _customerRepositoryMock;
         private ICustomerService _customerService;
+        private ILogger _logger;
 
         [TestInitialize]
         public void Setup()
         {
             _customerRepositoryMock = new Mock<IRepository<Customer>>();
-            _customerService = new CustomerService(_customerRepositoryMock.Object);
+            _logger = new LoggerConfiguration().CreateLogger();
+            _customerService = new CustomerService(_customerRepositoryMock.Object, _logger);
         }
 
         [TestMethod]
