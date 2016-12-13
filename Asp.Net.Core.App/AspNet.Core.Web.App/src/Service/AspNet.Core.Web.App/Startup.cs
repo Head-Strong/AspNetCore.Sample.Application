@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using AspNet.Core.Web.App.InitialSetup;
+﻿using AspNet.Core.Web.App.InitialSetup;
 using AspNet.Core.Web.App.Middleware;
 using EntityFramework.Core;
 using Microsoft.AspNetCore.Builder;
@@ -67,6 +66,8 @@ namespace AspNet.Core.Web.App
 
             var connection = @"Server=(localdb)\ProjectsV13;Database=TestDatabase;Trusted_Connection=True;";
 
+            //services.AddDbContext<TestDatabaseContext>(options => options.UseInMemoryDatabase());
+
             services
                 .AddDbContext<TestDatabaseContext>(options => options.UseSqlServer(connection));
 
@@ -93,7 +94,7 @@ namespace AspNet.Core.Web.App
 
             app.UseCors("AllowAllOrigins");
 
-            app.UseMiddleware<AuthenticateHandler>();
+            //app.UseMiddleware<AuthenticateHandler>();
 
             //app.UseMiddleware<TestMiddleware>();
 

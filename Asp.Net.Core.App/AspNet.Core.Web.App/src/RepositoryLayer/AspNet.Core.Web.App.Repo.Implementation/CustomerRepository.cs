@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AspNet.Core.Web.App.Repo.Implementation.Mapper;
 using AspNet.Core.Web.App.Repo.Interface;
@@ -63,6 +65,17 @@ namespace AspNet.Core.Web.App.Repo.Implementation
         public Task<Customer> SaveAsync(Customer entity)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Data()
+        {
+            var result = _testDatabaseContext.ProfileRoleLinks
+                                            .Include(x => x.Profile)
+                                            .Include(x => x.Role)
+                                            .Where(x => x.Profile.ProfileName.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                                            .Select(x=>x.Role.RoleName);
+
+           
         }
     }
 }

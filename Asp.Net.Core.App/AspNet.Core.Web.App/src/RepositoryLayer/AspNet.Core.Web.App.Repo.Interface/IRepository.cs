@@ -12,5 +12,7 @@ namespace AspNet.Core.Web.App.Repo.Interface
         Task<IEnumerable<T>> GetEntitiesAsync();
 
         Task<T> SaveAsync(T entity);
+
+        void Data();
     }
 }

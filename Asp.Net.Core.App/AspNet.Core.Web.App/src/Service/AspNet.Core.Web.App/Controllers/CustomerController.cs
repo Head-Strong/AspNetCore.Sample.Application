@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.Domains;
 using CustomLogger;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNet.Core.Web.App.Controllers
@@ -10,6 +12,7 @@ namespace AspNet.Core.Web.App.Controllers
     /// <summary>
     /// 
     /// </summary>
+    //[Authorize(Roles = "CustomerDetails")]
     [Route("api/[controller]")]
     public class CustomerController : Controller
     {

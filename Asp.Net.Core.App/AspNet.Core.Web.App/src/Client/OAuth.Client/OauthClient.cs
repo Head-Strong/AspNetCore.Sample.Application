@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using models;
 using Newtonsoft.Json;
 
@@ -59,7 +60,9 @@ namespace OAuth.Client
             {
 
                 httpClient.DefaultRequestHeaders.Clear();
-                httpClient.DefaultRequestHeaders.Add("Authorization",  accessToken);
+                httpClient.DefaultRequestHeaders.Add("Content-Type","application/json");
+                //httpClient.DefaultRequestHeaders.Add("Authorization", accessToken);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
                 var response = httpClient.GetAsync("http://localhost:61670/api/customer").Result;
 

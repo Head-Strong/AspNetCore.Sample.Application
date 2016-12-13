@@ -86,12 +86,18 @@ namespace AspNet.Core.Web.App.Middleware
             {
                 _oauthCache.SetAccessToken(accessToken, 50);
                 _logger.CustomInformation(informationMessage:"Handling Authentication Handler Finished.");
+                SetUserDetails(context);
                 await _next.Invoke(context);
             }
             else
             {
                 await UnAuthorizedResponseToClient(context, ErrorMessages.ErrorMessageKey.InvalidAccessToken, 500);                
             }
+        }
+
+        private void SetUserDetails(HttpContext context)
+        {
+            //context.User = new Us
         }
 
         private async Task UnAuthorizedResponseToClient(HttpContext context, ErrorMessages.ErrorMessageKey errorMessageKey, int statusCode)

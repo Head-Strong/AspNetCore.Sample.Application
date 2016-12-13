@@ -31,5 +31,10 @@ namespace AspNet.Core.Web.App.Repo.Implementation
         {
             throw new System.NotImplementedException();
         }
+
+        public void Data()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

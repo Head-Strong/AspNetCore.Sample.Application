@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using AspNet.Core.Web.App.Bl.Interface;
 using AspNet.Core.Web.App.Repo.Interface;
@@ -21,7 +22,11 @@ namespace AspNet.Core.Web.App.Bl.Implementation
 
         public IEnumerable<Customer> GetCustomers()
         {
+            _repository.Data();
+
             _logger.CustomInformation(user: "Aditya", other: "CustomerService", enviornment: "Dev", host: "localhost", informationMessage: "Inside Get Customer Service");
+
+            //throw new InvalidDataException();
 
             return _repository.GetEntities();
         }

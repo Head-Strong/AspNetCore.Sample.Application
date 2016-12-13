@@ -10,8 +10,24 @@ namespace EntityFramework.Core
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProfileRoleLink>().HasKey(x => new
+            {
+                x.IdProfile,
+                x.IdRole
+            });
+        }
+
         public virtual DbSet<Customer> Customer { get; set; }
 
         public virtual DbSet<Address> Address { get; set; }
+
+        public virtual DbSet<Profiles> Profiles { get; set; }
+
+        public virtual DbSet<Roles> Roles { get; set; }
+
+        public virtual DbSet<ProfileRoleLink> ProfileRoleLinks { get; set; }
+
     }
 }
